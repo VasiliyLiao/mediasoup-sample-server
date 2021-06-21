@@ -1,0 +1,17 @@
+require('dotenv').config();
+
+const {
+    HTTPS_PORT,
+    MEDIASOUP_MIN_PORT,
+    MEDIASOUP_MAX_PORT,
+    MEDIASOUP_LISTEN_IP,
+    MEDIASOUP_ANNOUNCED_IP,
+} = process.env;
+
+module.exports = {
+    HTTPS_PORT,
+    MEDIASOUP_MIN_PORT,
+    MEDIASOUP_MAX_PORT,
+    MEDIASOUP_LISTEN_IP,
+    MEDIASOUP_ANNOUNCED_IP,
+};

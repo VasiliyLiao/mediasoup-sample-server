@@ -1,4 +1,10 @@
 const os = require('os');
+const {
+  MEDIASOUP_MIN_PORT,
+  MEDIASOUP_MAX_PORT,
+  MEDIASOUP_LISTEN_IP,
+  MEDIASOUP_ANNOUNCED_IP,
+} = require('../env');
 
 module.exports = Object.freeze({
   numWorkers: Object.keys(os.cpus()).length,
@@ -10,8 +16,8 @@ module.exports = Object.freeze({
       'ice',
       'dtls'
     ],
-    rtcMinPort: 40000,
-    rtcMaxPort: 49999
+    rtcMinPort: MEDIASOUP_MIN_PORT,
+    rtcMaxPort: MEDIASOUP_MAX_PORT
   },
   router: {
     mediaCodecs: [
@@ -29,7 +35,7 @@ module.exports = Object.freeze({
     ]
   },
   webRtcTransport: {
-    listenIps: [ { ip: '192.168.60.99', announcedIp: undefined } ],
+    listenIps: [ { ip: MEDIASOUP_LISTEN_IP, announcedIp: MEDIASOUP_ANNOUNCED_IP } ],
     enableUdp: true,
     enableTcp: true,
     preferUdp: true,

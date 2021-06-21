@@ -4,6 +4,9 @@ const WebSocket = require('ws');
 
 const { handleSocket } = require('./socket');
 const { initializeWorkers } = require('./worker');
+const {
+    HTTPS_PORT,
+} = require('../env');
 
 const HTTPS_OPTIONS = Object.freeze({
   cert: fs.readFileSync('./ssl/server.crt'),
@@ -15,7 +18,7 @@ const httpsServer = https.createServer(HTTPS_OPTIONS);
 const wss = new WebSocket.Server({
   maxPayload: 200000000,
   server: httpsServer
-}, () => console.log('WebSocket.Server started at port 8080'));
+}, () => console.log(`WebSocket.Server started at port ${HTTPS_PORT}`));
 
 const noop = () => {};
 
@@ -27,8 +30,8 @@ function heartbeat () {
   try {
     await initializeWorkers();
 
-    httpsServer.listen(443, () =>
-      console.log('websocket SSL server running on port 443')
+    httpsServer.listen(HTTPS_PORT, () =>
+      console.log(`websocket SSL server running on port ${HTTPS_PORT}`)
     );
   } catch (error) {
     console.error('Failed to initialize workers [error:%o]', error);
